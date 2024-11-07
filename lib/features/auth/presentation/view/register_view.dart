@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -102,6 +101,8 @@ class _RegisterViewState extends State<RegisterView> {
                     ),
                     const Gap(25),
                     CustomTextFormField(
+                      maxLines: 1,
+
                       textInputAction: TextInputAction.done,
                       textAlign: TextAlign.end,
                       controller: passwordController,

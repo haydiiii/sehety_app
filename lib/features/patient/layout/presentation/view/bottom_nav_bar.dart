@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:sehety_app/core/utils/colors.dart';
 import 'package:sehety_app/features/appointment/presentation/view/appointment_vie.dart';
-import 'package:sehety_app/features/home/presentation/view/home_view.dart';
-import 'package:sehety_app/features/profile/presentation/view/profile_view.dart';
-import 'package:sehety_app/features/search/presentation/view/search_view.dart';
+import 'package:sehety_app/features/patient/home/presentation/view/home_view.dart';
+import 'package:sehety_app/features/patient/profile/presentation/view/profile_view.dart';
+import 'package:sehety_app/features/patient/search/presentation/view/search_view.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:sehety_app/core/utils/colors.dart';
 import 'package:sehety_app/core/utils/text_style.dart';
 
 class SearchBarWidget extends StatelessWidget {
+  final String text;
+  final Widget suffixIcon;
   const SearchBarWidget({
     super.key,
-    required this.searchController,
+    required this.searchController, required this.text, required this.suffixIcon,
   });
 
   final TextEditingController searchController;
@@ -21,15 +22,17 @@ class SearchBarWidget extends StatelessWidget {
               border: OutlineInputBorder(
                   borderSide: BorderSide.none,
                   borderRadius: BorderRadius.circular(25)),
-              hintText: 'ابحث عن دكتور',
-              suffixIcon: FloatingActionButton(
-                backgroundColor: AppColors.primaryColor,
-                onPressed: () {},
-                child: const Icon(
-                  Icons.search,
-                  color: AppColors.whiteColor,
-                ),
-              )),
+              hintText: text,
+              suffixIcon: suffixIcon),
         ));
   }
 }
+// 'ابحث عن دكتور'
+// FloatingActionButton(
+//                 backgroundColor: AppColors.primaryColor,
+//                 onPressed: () {},
+//                 child: const Icon(
+//                   Icons.search,
+//                   color: AppColors.whiteColor,
+//                 ),
+//               )

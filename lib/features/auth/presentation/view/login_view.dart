@@ -86,6 +86,7 @@ class _LoginViewState extends State<LoginView> {
                     ),
                     const Gap(25),
                     CustomTextFormField(
+                      maxLines: 1,
                       textInputAction: TextInputAction.done,
                       textAlign: TextAlign.end,
                       controller: passwordController,

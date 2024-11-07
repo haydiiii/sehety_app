@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:sehety_app/core/constatnts/assets_image.dart';
 import 'package:sehety_app/core/utils/colors.dart';
 import 'package:sehety_app/core/utils/text_style.dart';
 import 'package:sehety_app/core/widget/custm_txt_formfield.dart';
 import 'package:sehety_app/core/widget/custom_button.dart';
 import 'package:sehety_app/features/auth/data/view_model/specialization_model.dart';
+
+String? path;
 
 class RegiterationDoctorDone extends StatefulWidget {
   const RegiterationDoctorDone({super.key});
@@ -20,6 +24,48 @@ class _RegiterationDoctorDoneState extends State<RegiterationDoctorDone> {
   TextEditingController address = TextEditingController();
   TextEditingController phone1 = TextEditingController();
   TextEditingController phone2 = TextEditingController();
+  late String startTime =
+      DateFormat('hh').format(DateTime(2023, 9, 7, 10, 00));
+  late String endTime = DateFormat('hh').format(DateTime(2023, 9, 7, 22, 00));
+  ////////////////modalBottomSheet////////////////////
+  showImageSourceOptions() {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return SafeArea(
+              child: Wrap(
+            children: [
+              ListTile(
+                leading:
+                    const Icon(Icons.camera_alt, color: AppColors.primaryColor),
+                title: const Text('فتح الكاميرا'),
+                onTap: () {
+                  uploadImage(isCammera: true);
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.photo_library_outlined,
+                    color: AppColors.primaryColor),
+                title: const Text('فتح المعرض'),
+                onTap: () {
+                  uploadImage(isCammera: false);
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ));
+        });
+  }
+    uploadImage({required bool isCammera}) async {
+    final picImage = await ImagePicker().pickImage(
+        source: isCammera ? ImageSource.camera : ImageSource.gallery);
+    if (picImage != null) {
+      setState(() {
+        path = picImage.path;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +101,9 @@ class _RegiterationDoctorDoneState extends State<RegiterationDoctorDone> {
                       radius: 20,
                       backgroundColor: Colors.white,
                       child: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          showImageSourceOptions();
+                        },
                         icon: const Icon(
                           Icons.camera_alt_outlined,
                           color: AppColors.primaryColor,
@@ -159,8 +207,20 @@ class _RegiterationDoctorDoneState extends State<RegiterationDoctorDone> {
                     Expanded(
                         child: TextFormField(
                       decoration: InputDecoration(
+                          hintText: startTime,
                           suffixIcon: IconButton(
-                              onPressed: () {},
+                              onPressed: () async {
+                                await showTimePicker(
+                                        context: context,
+                                        initialTime: TimeOfDay.now())
+                                    .then((value) {
+                                  if (value != null) {
+                                    setState(() {
+                                      startTime = value.format(context);
+                                    });
+                                  }
+                                });
+                              },
                               icon: const Icon(
                                 Icons.alarm,
                                 color: AppColors.primaryColor,
@@ -175,8 +235,22 @@ class _RegiterationDoctorDoneState extends State<RegiterationDoctorDone> {
                         child: TextFormField(
                       readOnly: true,
                       decoration: InputDecoration(
+                          hintText: endTime,
                           suffixIcon: IconButton(
-                              onPressed: () {},
+                              onPressed: ()async {
+                               await  showTimePicker(
+                                        context: context,
+                                        initialTime: TimeOfDay.fromDateTime(
+                                            DateTime.now()
+                                                .add(Duration(minutes: 30))))
+                                    .then((value) {
+                                  if (value != null) {
+                                    setState(() {
+                                      endTime = value.format(context);
+                                    });
+                                  }
+                                });
+                              },
                               icon: const Icon(
                                 Icons.alarm,
                                 color: AppColors.primaryColor,
@@ -244,4 +318,6 @@ class _RegiterationDoctorDoneState extends State<RegiterationDoctorDone> {
       ),
     );
   }
+
+
 }

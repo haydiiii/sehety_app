@@ -3,9 +3,9 @@ import 'package:gap/gap.dart';
 import 'package:sehety_app/core/utils/colors.dart';
 import 'package:sehety_app/core/utils/text_style.dart';
 import 'package:sehety_app/core/widget/doctor_rate_card.dart';
-import 'package:sehety_app/features/home/presentation/view/widgets/app_bar.dart';
-import 'package:sehety_app/features/home/presentation/view/widgets/search_bar_widget.dart';
-import 'package:sehety_app/features/home/presentation/view/widgets/specialization_card.dart';
+import 'package:sehety_app/features/patient/home/presentation/view/widgets/app_bar.dart';
+import 'package:sehety_app/features/patient/home/presentation/view/widgets/search_bar_widget.dart';
+import 'package:sehety_app/features/patient/home/presentation/view/widgets/specialization_card.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -48,7 +48,17 @@ class _HomeViewState extends State<HomeView> {
                 style: getTitleStyle(color: AppColors.blackColor, fontSize: 20),
               ),
               const Gap(10),
-              SearchBarWidget(searchController: searchController),
+              SearchBarWidget(
+                  suffixIcon: FloatingActionButton(
+                    backgroundColor: AppColors.primaryColor,
+                    onPressed: () {},
+                    child: const Icon(
+                      Icons.search,
+                      color: AppColors.whiteColor,
+                    ),
+                  ),
+                  searchController: searchController,
+                  text: 'ابحث عن دكتور'),
               const Gap(10),
               Align(
                   alignment: Alignment.centerRight,
@@ -69,4 +79,3 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 }
-

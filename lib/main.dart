@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sehety_app/core/utils/colors.dart';
 import 'package:sehety_app/features/auth/presentation/manager/auth_cubit.dart';
-import 'package:sehety_app/features/layout/presentation/view/bottom_nav_bar.dart';
+import 'package:sehety_app/features/auth/presentation/view/regiteration_doctor_done.dart';
+import 'package:sehety_app/features/splash/view/splash_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +27,11 @@ class MainApp extends StatelessWidget {
       create: (context) => AuthCubit(),
       child: MaterialApp(
         theme: ThemeData(
+            dividerTheme: const DividerThemeData(
+              color: AppColors.greyColor,
+              endIndent: 20,
+              indent: 20,
+            ),
             appBarTheme:
                 const AppBarTheme(backgroundColor: AppColors.primaryColor),
             inputDecorationTheme: InputDecorationTheme(
@@ -33,7 +39,7 @@ class MainApp extends StatelessWidget {
               filled: true,
             )),
         debugShowCheckedModeBanner: false,
-        home: const BottomNavBar(),
+        home: const RegiterationDoctorDone(),
         builder: (context, child) {
           return Directionality(
               textDirection: TextDirection.rtl, child: child!);
